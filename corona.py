@@ -20,7 +20,7 @@ for i in dashBoard:
 driver.close()
 
 url = 'https://notify-api.line.me/api/notify'
-access_token = '8menQ9ILfMC7HK8a2MSN8fJCsX9AJETyJj38ryVs6iS'
+access_token = 'LINE TOKEN'
 headers = {'Authorization': 'Bearer ' + access_token}
 
 message = kosin, jokyo
