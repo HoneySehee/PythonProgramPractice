@@ -17,7 +17,7 @@ while True:
     if procname() is None:
         #Line API
         url = 'https://notify-api.line.me/api/notify'
-        access_token = '8menQ9ILfMC7HK8a2MSN8fJCsX9AJETyJj38ryVs6iS'
+        access_token = 'LineTOKEN'
         headers = {'Authorization': 'Bearer ' + access_token}
 
         message = 'Process Down!!'
