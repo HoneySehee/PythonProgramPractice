@@ -1,28 +1,38 @@
 from urllib.parse import quote_plus
 from bs4 import BeautifulSoup
 from selenium import webdriver
-import requests
+import requests , time
 
-url = "https://hazard.yahoo.co.jp/article/covid19tokyo"
+def send_line(*args):
+    url = 'https://notify-api.line.me/api/notify'
+    access_token = 'TOKEN'
+    headers = {'Authorization': 'Bearer ' + access_token}
+    message = args
+    payload = {'message': message}
+    r = requests.post(url, headers=headers, params=payload,)
 
-driver = webdriver.Chrome()
-driver.get(url)
+send_lists = []
 
-html = driver.page_source
-soup = BeautifulSoup(html, "lxml")
+while True:
+    url = "https://hazard.yahoo.co.jp/article/covid19tokyo"
+    driver = webdriver.Chrome()
+    driver.get(url)
 
-dashBoard = soup.select('.dashBoard')
+    html = driver.page_source
+    soup = BeautifulSoup(html, "lxml")
 
-for i in dashBoard:
-    kosin = (i.select_one('.notes__item.notes__item--right').text)
-    jokyo = (i.select_one('.dashBoard__main').text)
+    dashBoard = soup.select('.dashBoard')
 
-driver.close()
+    for i in dashBoard:
+        item = (i.select('.notes__item')[1].text)
+        title = (i.select_one('.dashBoard__title').text)
+        main = (i.select('.dashBoard__main')[0].text)
+        
+        driver.close()
+        print(item)
+        
+        if item not in send_lists:
+            send_line(item + '\n', title + '\n', main + '\n')
+            send_lists.append(item)
 
-url = 'https://notify-api.line.me/api/notify'
-access_token = 'LINE TOKEN'
-headers = {'Authorization': 'Bearer ' + access_token}
-
-message = kosin, jokyo
-data = {'message': message}
-r = requests.post(url, headers=headers, params=data,)
+    time.sleep(3600)
