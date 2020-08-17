@@ -1,6 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
 
+def send_line(*args):
+    url = 'https://notify-api.line.me/api/notify'
+    access_token = 'TOKEN'
+    headers = {'Authorization': 'Bearer ' + access_token}
+    message = args
+    payload = {'message': message}
+    r = requests.post(url, headers=headers, params=payload,)
+
 link = "https://www.krcert.or.kr"
 r = requests.get("https://www.krcert.or.kr/data/secNoticeList.do")
 bs = BeautifulSoup(r.text, "lxml")
@@ -13,10 +21,4 @@ for tr in trs:
     date = tds[4].text
     links = tds[1].select("a")[0]['href']
 
-    url = 'https://notify-api.line.me/api/notify'
-    access_token = 'TOKEN'
-    headers = {'Authorization': 'Bearer ' + access_token}
-
-    message = title + '\n' + date + '\n' + '{}'.format(link) + links
-    data = {'message': message}
-    r = requests.post(url, headers=headers, params=data,)
+    send_line(title + '\n' + date + '\n' + '{}'.format(link) + links)
