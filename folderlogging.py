@@ -6,7 +6,7 @@ import requests
 
 def send_line(message):
     url = 'https://notify-api.line.me/api/notify'
-    access_token = '8menQ9ILfMC7HK8a2MSN8fJCsX9AJETyJj38ryVs6iS'
+    access_token = 'TOKEN'
     headers = {'Authorization': 'Bearer ' + access_token}
     message = message
     payload = {'message': message}
