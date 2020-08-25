@@ -3,7 +3,7 @@ import requests,time
 
 def send_line(*args):
     url = 'https://notify-api.line.me/api/notify'
-    access_token = 'mkTxlIZhb4KbMU0isJlcrzTUUy8fLW5CCJhMG1IzwIA'
+    access_token = 'TOKEN'
     headers = {'Authorization': 'Bearer ' + access_token}
     message = args
     payload = {'message': message}
