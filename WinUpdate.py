@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 def send_line(args):
     url = 'https://notify-api.line.me/api/notify'
-    access_token = '54BkwrXunHMpeuOhpkXDTQrPwNtsUW7oiZew05RoKBR'
+    access_token = 'MyToken'
     headers = {'Authorization': 'Bearer ' + access_token}
     message = args
     payload = {'message': message}
